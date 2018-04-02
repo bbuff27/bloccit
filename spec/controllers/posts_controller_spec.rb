@@ -41,16 +41,16 @@ RSpec.describe PostsController, type: :controller do
 
   describe "POST create" do
     it "increases the number of Post by 1" do
-      expect{ post :create, params: {post: {title:RandomData.random_sentence, body: RandomData.random_paragraph}} }.to change(Post,:count).by(1)
+      expect{ post :create, params: {post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}} }.to change(Post,:count).by(1)
     end
 
     it "assigns the new post to @post" do
-      post :create, params: {post: {title:RandomData.random_sentence, body: RandomData.random_paragraph}}
-      expect(assigns(post)).to eq(Post.last)
+      post :create, params: {post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}
+      expect(assigns(:post)).to eq(Post.last)
     end
 
     it "redirects to the new post" do 
-      post :create, params: {post: {title:RandomData.random_sentence, body: RandomData.random_paragraph}}
+      post :create, params: {post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}
       expect(response).to redirect_to(Post.last)
     end
   end
