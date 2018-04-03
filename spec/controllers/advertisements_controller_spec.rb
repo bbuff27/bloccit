@@ -11,7 +11,7 @@ RSpec.describe AdvertisementsController, type: :controller do
 
     it "assigns [new_ad] to @advertisement" do
       get :index
-      expect(assigns(:ads)).to eq([new_ad])
+      expect(assigns(:advertisements)).to eq([new_ad])
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe AdvertisementsController, type: :controller do
 
     it "assignes new_ad to @post" do
       get :show, params: { id: new_ad.id }
-      expect(assigns(:ad)).to eq(new_ad)
+      expect(assigns(:advertisement)).to eq(new_ad)
     end
   end
 
@@ -43,24 +43,24 @@ RSpec.describe AdvertisementsController, type: :controller do
       expect(response).to render_template :new
     end
 
-    it "instantiates @ad" do
+    it "instantiates @advertisement" do
       get :new
-      expect(assigns(:ad)).not_to be_nil
+      expect(assigns(:advertisement)).not_to be_nil
     end
   end
 
   describe "POST #create" do
     it "increases the number of Advertisement by 1" do
-      expect{ post :create, params: {ad: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..100)}} }.to change(Advertisement,:count).by(1)
+      expect{ post :create, params: {advertisement: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..100)}} }.to change(Advertisement,:count).by(1)
     end
 
-    it "assigns the new advertisement to @ad" do
-      post :create, params: {ad: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..100)}}
-      expect(assigns(:ad)).to eq(Advertisement.last)
+    it "assigns the new advertisement to @advertisement" do
+      post :create, params: {advertisement: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..100)}}
+      expect(assigns(:advertisement)).to eq(Advertisement.last)
     end
 
     it "redirects to the new advertisement" do 
-      post :create, params: {ad: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..100)}}
+      post :create, params: {advertisement: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: rand(1..100)}}
       expect(response).to redirect_to(Advertisement.last)
     end
   end
