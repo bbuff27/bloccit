@@ -71,19 +71,26 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  # describe "GET #update" do
-  #   it "returns http success" do
-  #     get :update
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+  describe "PUT #update" do
+    it "updates question with expected attributes" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
 
-  # describe "GET #destroy" do
-  #   it "returns http success" do
-  #     get :destroy
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+      put :update, params: { id: my_question.id, question: {title: new_title, body: new_body, resolved: true} }
+      updated_question = assigns(:question)
+
+      expect(updated_question.id).to eq(my_question.id)
+      expect(updated_question.title).to eq(new_title)
+      expect(updated_question.body).to eq(new_body)
+    end
+
+    it "redirects to the updated question" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
+      put :update, params: { id: my_question.id, question: {title: new_title, body: new_body, resolved: true} }
+      expect(response).to redirect_to(my_question)
+    end
+  end
 
   describe "POST #create" do
     it "increases the number of Question by 1" do
