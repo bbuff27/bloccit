@@ -92,6 +92,19 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "DELETE #destroy" do
+    it "deletes the question" do
+      delete :destroy, params: { id: my_question.id }
+      count = Question.where({id: my_question.id}).size
+      expect(count).to eq(0)
+    end
+
+    it "redirects to the question index" do
+      delete :destroy, params: { id: my_question.id }
+      expect(response).to redirect_to(questions_path)
+    end
+  end
+
   describe "POST #create" do
     it "increases the number of Question by 1" do
       expect{post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }}.to change(Question,:count).by(1)
