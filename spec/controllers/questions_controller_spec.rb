@@ -70,11 +70,19 @@ RSpec.describe QuestionsController, type: :controller do
   #   end
   # end
 
-  # describe "GET #create" do
-  #   it "returns http success" do
-  #     get :create
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+  describe "POST #create" do
+    it "increases the number of Question by 1" do
+      expect{post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }}.to change(Question,:count).by(1)
+    end
 
+    it "assigns the new question to @question" do
+      post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }
+      expect(assigns(:question)).to eq(Question.last)
+    end
+
+    it "redirects to the new question" do
+      post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }
+      expect(response).to redirect_to(Question.last)
+    end
+  end
 end
