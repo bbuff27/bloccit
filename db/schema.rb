@@ -27,4 +27,12 @@ ActiveRecord::Schema.define(version: 20180404003805) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "title"
+    t.string "string"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 end
