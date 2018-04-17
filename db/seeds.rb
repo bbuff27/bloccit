@@ -37,6 +37,12 @@ posts = Post.all
 	)
 end
 
+user = User.first
+user.update!(
+	email: "bbuff27@gmail.com",
+	password: "helloworld"
+)
+
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
