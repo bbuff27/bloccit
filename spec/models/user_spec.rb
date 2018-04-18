@@ -31,7 +31,7 @@ RSpec.describe User, type: :model do
     end
 
     it "responds to member?" do
-      expect(user).to respond_to(:memeber?)
+      expect(user).to respond_to(:member?)
     end
   end
 
