@@ -65,13 +65,13 @@ RSpec.describe VotesController, type: :controller do
   end
 
   describe "POST down_vote" do
-    it "the user first vote increases the number of post votes by 1" do
+    it "the users first vote increases number of post votes by one" do
       votes = user_post.votes.count
       post :down_vote, params: { post_id: user_post.id }
       expect(user_post.votes.count).to eq(votes + 1)
     end
 
-    it "the user second votes does not increase the number of post votes" do
+    it "the users second vote does not increase the number of votes" do
       post :down_vote, params: { post_id: user_post.id }
       votes = user_post.votes.count
       post :down_vote, params: { post_id: user_post.id }
@@ -84,13 +84,13 @@ RSpec.describe VotesController, type: :controller do
       expect(user_post.points).to eq(points - 1)
     end
 
-    it ":back redirects to the post show page" do
+    it ":back redirects to posts show page" do
       request.env["HTTP_REFERER"] = topic_post_path(my_topic, user_post)
       post :down_vote, params: { post_id: user_post.id }
       expect(response).to redirect_to([my_topic, user_post])
     end
 
-    it ":back redirects to the posts topic show" do
+    it ":back redirects to posts topic show" do
       request.env["HTTP_REFERER"] = topic_path(my_topic)
       post :down_vote, params: { post_id: user_post.id }
       expect(response).to redirect_to(my_topic)
