@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>You are following "<%= @post.title %>"</h1>
+    <h3>If you no longer wish to receive notifications, you can <%= link_to "unfavorite", topic_post_url(@post.topic, @post) %></h3>
+    <p>
+      <%= link_to "View Post", topic_post_url(@post.topic, @post) %>
+    </p>
+  </body>
+</html>
